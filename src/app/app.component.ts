@@ -3,14 +3,17 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `<div>Hello {{ value }}</div>`,
+  template: `<div>{{ value }}</div>`,
 })
 export class AppComponent {
   value = 'World';
 
   constructor(private http: HttpClient) {
     this.http
-      .get('/api/message')
-      .subscribe((resp: any) => (this.value = resp.body));
+      .get('/api/capitalize?name="Sunil"')
+      .subscribe((resp: any) => {
+        console.log(resp);
+        (this.value = resp.text);
+      });
   }
 }
